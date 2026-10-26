@@ -1,1 +1,1 @@
-{"pending":{"key":"coemio-ops-afc33e48-d8c1-4b51-a613-a7a99ea888c1","mail":{"signature":"7f6df52d58adae974a69c45fdde3fc69ded5823658b07c73599e0684f8c255a2","subject":"COEMIO 運用監視：要確認","text":"運用検査で確認が必要な状態を検出しました。\n確認時刻: 2026-10-26T06:50:09.484Z\nSERVICE_NOT_READY\n\n管理画面で稼働状況とログを確認してください。\nhttps://dashboard.render.com/web/srv-dbdcl87b9u1s7397tkh0\n\nこの通知には顧客情報・秘密情報を含みません。"},"from":"COEMIO <login@struct-saas.com>","to":"info@struct-saas.com","test":false,"createdAt":1792997409488}}
+{"delivered":{"signature":"7f6df52d58adae974a69c45fdde3fc69ded5823658b07c73599e0684f8c255a2"}}
