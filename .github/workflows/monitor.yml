@@ -1,0 +1,37 @@
+name: COEMIO public readiness monitor
+on:
+  schedule:
+    - cron: '41 * * * *'
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Check production or send a labelled drill pair
+        default: check
+        type: choice
+        options: [check, drill]
+permissions:
+  contents: write
+concurrency:
+  group: coemio-public-readiness-monitor
+  cancel-in-progress: false
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Check readiness and notify on change
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          COEMIO_RESEND_API_KEY: ${{ secrets.COEMIO_MONITOR_RESEND_API_KEY }}
+          COEMIO_EMAIL_FROM: ${{ secrets.COEMIO_MONITOR_EMAIL_FROM }}
+          COEMIO_OPERATIONS_EMAIL_TO: info@struct-saas.com
+          MONITOR_MODE: ${{ inputs.mode }}
+        run: |
+          if [ "$MONITOR_MODE" = drill ]; then
+            node monitor.mjs --drill
+          else
+            node monitor.mjs
+          fi
